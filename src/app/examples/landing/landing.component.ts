@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-landing',
@@ -10,8 +11,12 @@ export class LandingComponent implements OnInit {
   focus: any;
   focus1: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
+
+  redirectToSignup() {
+    this.router.navigate(['/signup']);
+  }
 
 }

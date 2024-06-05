@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
@@ -10,7 +11,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(public location: Location, private element : ElementRef, private router: Router) {
         this.sidebarVisible = false;
     }
 
@@ -70,5 +71,21 @@ export class NavbarComponent implements OnInit {
         else {
             return false;
         }
+    }
+    isLoggedIn() {
+        var titlee = this.location.prepareExternalUrl(this.location.path());
+        if(titlee.charAt(0) === '#'){
+            titlee = titlee.slice( 1 );
+        }
+          if( titlee === '/user-profile' ) {
+            return true;
+          }
+          else {
+            return false;
+        }
+    }
+
+    redirectToSignin() {
+        this.router.navigate(['/signin']);
     }
 }

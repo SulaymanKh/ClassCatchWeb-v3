@@ -2,12 +2,18 @@
     <div class="filter"></div>
     <div class="container">
         <div class="motto text-center">
-            <h1>Example page</h1>
-            <h3>Start designing your landing page here.</h3>
+            <div class="title-brand">
+                <div class="angular-logo">
+                    <img src="assets/img/angular2-logo.png" alt="">
+                </div>
+                <h1 class="presentation-title">Class Catch</h1>
+                <h2 class="presentation-subtitle text-center">Your ultimate platform for scheduling, organizing lessons, and managing payments.</h2>
+            </div>
             <br />
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-outline-neutral btn-round"><i class="fa fa-play"></i>Watch video</a>
-            <button type="button" class="btn btn-outline-neutral btn-round">Download</button>
+            <button type="button" (click)="redirectToSignup()" class="btn btn-outline-neutral btn-round">Get Started - Tutors</button>
+            <button type="button" (click)="redirectToSignup()" class="btn btn-outline-neutral btn-round">Get Started - Students</button>
         </div>
+        <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>
     </div>
 </div>
 <div class="main">
