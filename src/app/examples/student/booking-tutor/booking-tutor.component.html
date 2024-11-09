@@ -1,0 +1,108 @@
+<div class="wrapper">
+  <!-- Page Header -->
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/banner.jpg');">
+    <div class="filter"></div>
+    <div class="container text-center">
+      <h2 class="display-4">Book Your Tutor</h2>
+    </div>
+  </div>
+  <!-- Profile Content Section -->
+  <div class="section profile-content">
+    <div class="container">
+      <button class="mobile-filters-button" (click)="toggleMobileFilter()" *ngIf="isMobile">Filters</button>
+      <div class="booking-tutor-page">
+        <div class="filters-container" [class.mobile-filters]="isMobile">
+          <h3>Filters</h3>
+          <form>
+            <div class="filter-group">
+              <label for="subject">Subject</label>
+              <select id="subject" [(ngModel)]="filters.subject" name="subject">
+                <option *ngFor="let subject of subjects">{{ subject }}</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="rating">Rating</label>
+              <select id="rating" [(ngModel)]="filters.rating" name="rating">
+                <option *ngFor="let rating of ratings">{{ rating }}</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="name">Name</label>
+              <input id="name" [(ngModel)]="filters.name" name="name" type="text">
+            </div>
+            <div class="filter-group">
+              <label for="location">Location</label>
+              <input id="location" [(ngModel)]="filters.location" name="location" type="text">
+            </div>
+            <div class="filter-group">
+              <label for="availability">Availability</label>
+              <select id="availability" [(ngModel)]="filters.availability" name="availability">
+                <option *ngFor="let availability of availabilities">{{ availability }}</option>
+              </select>
+            </div>
+            <button type="button" class="button" (click)="applyFilters()">Search</button>
+          </form>
+        </div>
+  
+        <!-- Mobile Filter Modal -->
+        <div class="mobile-filter-modal" *ngIf="showMobileFilter">
+          <div class="mobile-filter-content">
+            <h3>Filters</h3>
+            <form>
+              <div class="filter-group">
+                <label for="mobile-subject">Subject</label>
+                <select id="mobile-subject" [(ngModel)]="filters.subject" name="mobile-subject">
+                  <option *ngFor="let subject of subjects">{{ subject }}</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="mobile-rating">Rating</label>
+                <select id="mobile-rating" [(ngModel)]="filters.rating" name="mobile-rating">
+                  <option *ngFor="let rating of ratings">{{ rating }}</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="mobile-name">Name</label>
+                <input id="mobile-name" [(ngModel)]="filters.name" name="mobile-name" type="text">
+              </div>
+              <div class="filter-group">
+                <label for="mobile-location">Location</label>
+                <input id="mobile-location" [(ngModel)]="filters.location" name="mobile-location" type="text">
+              </div>
+              <div class="filter-group">
+                <label for="mobile-availability">Availability</label>
+                <select id="mobile-availability" [(ngModel)]="filters.availability" name="mobile-availability">
+                  <option *ngFor="let availability of availabilities">{{ availability }}</option>
+                </select>
+              </div>
+              <button type="button" class="button" (click)="applyFilters()">Search</button>
+              <button type="button" class="button" (click)="toggleMobileFilter()">Close</button>
+            </form>
+          </div>
+        </div>
+  
+        <div class="tutor-list">
+          <h3>Tutors</h3>
+          <p>Showing {{ (tutors | tutorFilter:filters).length }} tutors</p>
+          <div *ngFor="let tutor of tutors | tutorFilter:filters" class="tutor-card">
+            <img [src]="tutor.image" alt="{{ tutor.name }}">
+            <div class="tutor-info">
+              <h4>{{ tutor.name }}</h4>
+              <p>Subject: {{ tutor.subject }}</p>
+              <p>Rating: {{ tutor.rating }}</p>
+              <p>About: {{ tutor.about }}</p>
+              <button class="book-button">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner 
+      *ngIf="loading" 
+      bdColor="rgba(0, 0, 0, 0.5)" 
+      size="medium"
+      color="#fff" 
+      type="ball-scale-multiple">
+  </ngx-spinner>
+</div>

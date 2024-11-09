@@ -1,5 +1,8 @@
 .card-register {
     padding: 30px;
+    margin: 0 auto; /* Add this line to center the card horizontally */
+    max-width: 400px; /* Adjust the maximum width of the card as per your design */
+    border-radius: 10px; /* Add border radius for rounded corners */
 }
 
 .form-group {

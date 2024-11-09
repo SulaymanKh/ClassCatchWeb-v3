@@ -1,0 +1,144 @@
+<div class="wrapper">
+    <!-- Page Header -->
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/banner.jpg');">
+        <div class="filter"></div>
+    </div>
+
+    <!-- Profile Content Section -->
+    <div class="section profile-content">
+        <div class="container">
+            <!-- Owner Information -->
+            <div class="owner text-center mt-5">
+                <div class="avatar">
+                    <img [src]="getProfilePictureUrl(user.profilePicture)" alt="Profile Picture" class="img-circle img-no-padding img-responsive">
+                </div>
+                <div class="name">
+                    <h4 *ngIf="user.firstName" class="title mt-3">{{ user.firstName }} {{ user.lastName }}</h4>
+                    <h4 *ngIf="!user.firstName" class="title mt-3">{{ user.username }}</h4>
+                    <h6 class="description">{{ user.role }}</h6>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <!-- ngbNav Tabs -->
+                    <ul ngbNav #nav="ngbNav" class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                        <li [ngbNavItem]="1" class="nav-item">
+                            <a class="nav-link" ngbNavLink>Bookings</a>
+                            <ng-template ngbNavContent>
+                                <div class="tab-pane fade show active">
+                                    <div class="text-center mt-5">
+                                        <h3 class="text-muted">No bookings yet :(</h3>
+                                        <br>
+                                        <button class="btn btn-warning btn-round" (click)="goToBookATutor()">Find Tutor</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li [ngbNavItem]="2" class="nav-item">
+                            <a class="nav-link" ngbNavLink>Book a Tutor</a>
+                            <ng-template ngbNavContent>
+                                <div class="tab-pane fade show active">
+                                    <div class="container mt-5">
+                                        <div class="row mb-3 filter-section">
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control search-input" placeholder="Search tutors" (input)="searchTutors(searchTerm.value, selectedSubject.value)" #searchTerm />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select class="form-control filter-dropdown" (change)="searchTutors(searchTerm.value, selectedSubject.value)" #selectedSubject>
+                                                    <option value="">All Subjects</option>
+                                                    <option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div *ngFor="let tutor of filteredTutors" class="col-12 col-sm-6 col-md-4 mb-4">
+                                                <div class="card h-100">
+                                                    <img [src]="tutor.photoUrl" class="card-img-top" alt="{{ tutor.name }}">
+                                                    <div class="card-body text-center">
+                                                        <h5 class="card-title">{{ tutor.name }}</h5>
+                                                        <p class="card-text">{{ tutor.role }}</p>
+                                                        <p class="card-text">{{ tutor.subject }}</p>
+                                                        <p class="card-text">
+                                                            <span class="badge badge-success">{{ tutor.rating }} ★</span>
+                                                        </p>
+                                                        <button class="btn btn-primary" (click)="selectTutor(tutor)">Select</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li [ngbNavItem]="3" class="nav-item">
+                            <a class="nav-link" ngbNavLink>Account</a>
+                            <ng-template ngbNavContent>
+                                <div id="notifications">
+                                    <app-notification></app-notification>
+                                </div>
+                                <div class="tab-pane fade show active">
+                                    <form class="mt-4" [formGroup]="profileForm" (ngSubmit)="updateDetails()">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="firstname">Firstname</label>
+                                                <input type="text" id="firstname" class="form-control" formControlName="firstname" placeholder="Brown" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="lastname">Lastname</label>
+                                                <input type="text" id="lastname" class="form-control" formControlName="lastname" placeholder="Asher" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail4">Email</label>
+                                            <input type="email" class="form-control" id="inputEmail4" formControlName="email" placeholder="brown@asher.me" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profilePicture">Profile Picture</label>
+                                            <input type="file" style="margin-left: 2px;" id="profilePicture" (change)="onProfilePictureChange($event)" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="isAvailable" class="d-block">Available for Booking</label>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="isAvailable" formControlName="isAvailable">
+                                                <label class="custom-control-label" for="isAvailable">{{ profileForm.value.isAvailable ? 'Available' : 'Not Available' }}</label>
+                                            </div>
+                                        </div>                                                                              
+                                        <hr class="my-4">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Old Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" formControlName="oldPassword" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword5">New Password</label>
+                                                <input type="password" class="form-control" id="inputPassword5" formControlName="newPassword" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword6">Confirm Password</label>
+                                            <input type="password" class="form-control" id="inputPassword6" formControlName="confirmPassword" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </form>
+                                </div>
+                            </ng-template>
+                            <ngx-spinner 
+                                *ngIf="loading" 
+                                bdColor="rgba(0, 0, 0, 0.5)" 
+                                size="medium"
+                                color="#fff" 
+                                type="ball-scale-multiple">
+                            </ngx-spinner>
+                        </li>
+                    </ul>
+
+                    <!-- ngbNavOutlet for Content -->
+                    <div [ngbNavOutlet]="nav"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

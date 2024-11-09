@@ -1,0 +1,346 @@
+body {
+    margin-top: 20px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .main-body {
+    padding: 15px;
+  }
+  
+  .nav-link {
+    color: #4a5568;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    cursor: pointer;  // Added for cursor pointer
+  
+    &:hover {
+      color: #2d3748;
+      background-color: #e7e8e9; // Added for background hover effect
+      border-color: #e2e8f0; // Added for border color change on hover
+    }
+  }
+  
+  .card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    border-radius: 0.25rem;
+  }
+  
+  .card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+  }
+  
+  .gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+  
+    > .col,
+    > [class*='col-'] {
+      padding-right: 8px;
+      padding-left: 8px;
+    }
+  }
+  
+  .mb-3,
+  .my-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .bg-gray-300 {
+    background-color: #e2e8f0;
+  }
+  
+  .h-100 {
+    height: 100% !important;
+  }
+  
+  .shadow-none {
+    box-shadow: none !important;
+  }
+  
+  .page-header {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  
+    &.page-header-xs {
+      min-height: 50vh;
+    }
+  
+    .filter {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+  
+  .wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav-pills .nav-link {
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+  
+    &.active {
+      background-color: #ff6f61;
+      color: #fff;
+    }
+  }
+  
+  .form-control {
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    transition: border-color 0.3s;
+  
+    &:focus {
+      border-color: #5a67d8;
+      box-shadow: 0 0 0 0.2rem rgba(90, 103, 216, 0.25);
+    }
+  }
+  
+  .btn {
+    transition: background-color 0.3s, border-color 0.3s;
+  
+    &.btn-primary {
+      &:hover {
+        background-color: #ff6f61;
+        border-color: #ff6f61;
+      }
+    }
+  
+    &.btn-light {
+      background-color: #f7a64a;
+      border-color: #edf2f7;
+  
+      &:hover {
+        background-color: #e2e8f0;
+        border-color: #e2e8f0;
+      }
+    }
+  
+    &.btn-info {
+      background-color: #63b3ed;
+      border-color: #63b3ed;
+  
+      &:hover {
+        background-color: #4299e1;
+        border-color: #4299e1;
+      }
+    }
+  
+    &.btn-danger {
+      background-color: #e53e3e;
+      border-color: #e53e3e;
+  
+      &:hover {
+        background-color: #c53030;
+        border-color: #c53030;
+      }
+    }
+  }
+  
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+  }
+  
+  /* Custom styles for mobile navigation */
+  .nav-tabs {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .nav-tabs .nav-item {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    cursor: pointer; // Added for cursor pointer
+  }
+  
+  .nav-tabs .nav-link.has-icon i {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  
+  .nav-tabs .nav-link.active {
+    background-color: #ff6f61;
+    color: #fff;
+    border-radius: 0.25rem;
+  }
+  
+  /* Adjustments for larger screens */
+  @media (min-width: 768px) {
+    .nav-pills .nav-link {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+    }
+  
+    .nav-tabs .nav-link {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    #profile {
+      padding-bottom: 1rem;
+    }
+  
+    #profile hr {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  
+  .text-success {
+      color: #28a745 !important;
+      font-weight: bold;
+  }
+
+  .btn {
+      margin-right: 10px;
+  }
+
+  .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+  }
+
+  .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+  }
+
+  .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+  }
+
+  .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+  }
+
+  .btn-info {
+      background-color: #63b3ed;
+      border-color: #63b3ed;
+  }
+
+  .btn-info:hover {
+      background-color: #4299e1;
+      border-color: #4299e1;
+  }
+
+  /* Ensure the toast container is correctly positioned */
+  .toast-container {
+    position: fixed;
+    z-index: 1050;
+    top: auto;
+    right: 1rem;
+    bottom: 1rem;
+    left: auto;
+
+    @media (max-width: 767.98px) {
+      bottom: 0.5rem;
+      right: 0.5rem;
+      left: 0.5rem;
+      width: calc(100% - 1rem);
+    }
+  }
+
+  /* Adjust individual toast styles for mobile */
+  .toast {
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: 767.98px) {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+  }
+
+  .card-details {
+    position: relative;
+    color: #fff;
+    background: linear-gradient(135deg, #f8aea8, #ff6f61);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .card-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+  }
+
+  .card-number {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .card-holder, .card-expires {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .card-label {
+    font-size: 0.8rem;
+    color: #ddd;
+  }
+
+  .card-info {
+    font-size: 1rem;
+  }
+
+  .card.border-success {
+    border: 2px solid #28a745 !important;  /* Add !important to ensure it overrides other styles */
+}
+
+.badge-light-success {
+  background-color: #d4edda;
+  color: #4eac64;
+  font-size: 0.75rem; /* Adjust font size as needed */
+  padding: 0.25em 0.4em; /* Adjust padding as needed */
+  border-radius: 0.25rem; /* Adjust border radius as needed */
+}
+
+

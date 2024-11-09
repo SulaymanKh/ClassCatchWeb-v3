@@ -1,0 +1,185 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.booking-tutor-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filters-container {
+  flex: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 300px;
+  animation: fadeInLeft 1s ease-in-out;
+}
+
+.filters-container h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  transition: background 0.3s;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  background: #fff;
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background: #5a67d8;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.button:hover {
+  background: #434190;
+  transform: translateY(-2px);
+}
+
+.tutor-list {
+  flex: 3;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tutor-list h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tutor-list p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.tutor-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tutor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.tutor-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.tutor-info h4 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.tutor-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.book-button {
+  padding: 10px 15px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.book-button:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .filters-container {
+    display: none;
+  }
+
+  .mobile-filters-button {
+    display: block;
+    margin: 10px 0;
+    background: #48bb78;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .mobile-filter-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-filter-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+  }
+}

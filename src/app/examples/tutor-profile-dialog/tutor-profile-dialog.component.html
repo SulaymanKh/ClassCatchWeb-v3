@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ tutor.name }}</h2>
+<div mat-dialog-content class="dialog-content">
+  <div class="tutor-info">
+    <img [src]="tutor.photoUrl" alt="{{ tutor.name }}" class="tutor-image">
+    <div class="tutor-details">
+      <p><strong>Subject:</strong> {{ tutor.subject }}</p>
+      <p><strong>Role:</strong> {{ tutor.role }}</p>
+      <p><strong>Rating:</strong> <span class="badge badge-success">{{ tutor.rating }} ★</span></p>
+      <p><strong>Experience:</strong> {{ tutor.experience }} years</p>
+    </div>
+  </div>
+  <p><strong>About Me:</strong></p>
+  <p>{{ tutor.description }}</p>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onClose()">Close</button>
+  <button mat-raised-button color="primary" (click)="onBookNow()">Book Now</button>
+</div>

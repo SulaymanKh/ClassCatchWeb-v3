@@ -1,0 +1,47 @@
+<form>
+  <div class="container p-0">
+    <div class="px-4">
+      <h1 mat-dialog-title class="dialog-title">Add Payment Method</h1>
+      <div class="row gx-3">
+        <div class="col-12">
+          <div class="d-flex flex-column">
+            <p class="text mb-1">Card Holder Name</p>
+            <input id="cardholderName" class="form-control mb-3" [(ngModel)]="cardHolderName" name="cardHolderName" type="text" placeholder="Enter cardholder name">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="d-flex flex-column">
+            <p class="text mb-1">Card Number</p>
+            <div id="card-element" class="form-control mb-3">
+              <div class="card-input" #cardNumberElement></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex flex-column">
+            <p class="text mb-1">Expiry</p>
+            <div id="expiry-element" class="form-control mb-3">
+              <div class="card-input" #cardExpiryElement></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex flex-column">
+            <p class="text mb-1">CVV/CVC</p>
+            <div id="cvc-element" class="form-control mb-3 pt-2">
+              <div class="card-input" #cardCvcElement></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div *ngIf="cardError" class="error-message">{{ cardError }}</div>
+          <div class="btn btn-primary mb-3" (click)="onAdd()">
+            <span class="ps-3">Add</span>
+            <span class="fas fa-arrow-right"></span>
+          </div>
+          <div class="btn btn-secondary mb-3" (click)="onCancel()">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

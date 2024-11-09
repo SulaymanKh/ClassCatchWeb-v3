@@ -1,0 +1,76 @@
+.mat-dialog-content {
+    text-align: left;
+    padding: 20px;
+  }
+  
+  .dialog-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  .tutor-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .tutor-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .tutor-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 14px;
+  }
+  
+  .tutor-details p {
+    margin: 5px 0;
+  }
+  
+  .badge {
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+    button {
+      margin: 0 10px;
+    }
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  

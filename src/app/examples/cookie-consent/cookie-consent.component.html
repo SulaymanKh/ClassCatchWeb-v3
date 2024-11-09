@@ -1,0 +1,15 @@
+<!-- <div class="cookie-consent" *ngIf="!isCookieAccepted">
+    <p>We use cookies to improve your experience on our site. By using our site, you accept our use of cookies.</p>
+    <button (click)="acceptCookies()">Accept</button>
+</div> -->
+
+<div class="cookie-consent" *ngIf="!isCookieAccepted">
+    <div class="cookie-content card p-3 text-center cookies">
+      <span class="mt-2">We use third party cookies to personalize content, ads and analyze site traffic.</span>
+      <a class="d-flex align-items-center" href="#">Learn more<i class="fa fa-angle-right ml-2"></i></a>
+      <button (click)="acceptCookies()" class="btn btn-dark mt-3 px-4" type="button">Okay</button>
+    </div>
+</div>
+  
+  
+  

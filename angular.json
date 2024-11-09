@@ -15,16 +15,23 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "zone.js",
             "assets": [
               "src/assets",
               "src/favicon.ico"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css", 
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/sass/paper-kit.scss",
               "src/assets/css/demo.css",
-              "src/assets/css/nucleo-icons.css"
+              "src/assets/css/nucleo-icons.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -50,18 +57,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pk2-angular:build"
+            "buildTarget": "pk2-angular:build"
           },
           "configurations": {
+            "hmr": {
+            "hmr": true
+            },
             "production": {
-              "browserTarget": "pk2-angular:build:production"
+              "buildTarget": "pk2-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pk2-angular:build"
+            "buildTarget": "pk2-angular:build"
           }
         },
         "test": {
@@ -69,14 +79,21 @@
           "options": {
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "zone.js",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/sass/paper-kit.scss",
               "src/assets/css/demo.css",
-              "src/assets/css/nucleo-icons.css"
+              "src/assets/css/nucleo-icons.css",
+              "src/styles.scss"
             ],
             "assets": [
               "src/assets",
@@ -120,11 +137,10 @@
       }
     }
   },
-  "defaultProject": "pk2-angular",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

@@ -1,48 +1,70 @@
 <div class="wrapper">
-    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
-      <div class="filter"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
-            <div class="card card-register">
-              <h3 class="title">Sign In</h3>
-              <form class="register-form" (ngSubmit)="signIn(username.value, password.value)">  
-                <label>Username</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-email-85"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" #username placeholder="Username" (focus)="focus=true" (blur)="focus=false" required>
+  <div class="page-header" style="background-image: url('./assets/img/login3.jpg');">
+    <section class="vh-100">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                 </div>
-  
-                <label>Password</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus1 === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-key-25"></i>
-                    </span>
+                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div class="card-body p-4 p-lg-5 text-black">
+                    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                      <div class="text-center mb-3 pb-1">
+                        <img src="assets/img/classCatchLogo.png" alt="" style="min-width: 40px; max-width: 200px;">
+                      </div>
+                      <h5 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Sign into your account</h5>
+                      
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-group form-group-border" [ngClass]="{'input-group-focus': focus === true}">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="nc-icon nc-email-85"></i>
+                            </span>
+                          </div>
+                          <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username" autocomplete="username" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                        <div *ngIf="signInForm.get('username').invalid && signInForm.get('username').touched" class="text-danger">
+                          Username is required
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group form-group-border" [ngClass]="{'input-group-focus': focus1 === true}">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="nc-icon nc-key-25"></i>
+                            </span>
+                          </div>
+                          <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" autocomplete="current-password" (focus)="focus1=true" (blur)="focus1=false">
+                        </div>
+                        <div *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched" class="text-danger">
+                          Password is required
+                        </div>
+                      </div>
+
+                      <div class="pt-1 mb-4">
+                        <button class="btn btn-danger btn-block btn-round" type="submit" [disabled]="signInForm.invalid">Login</button>
+                      </div>
+                      
+                      <a class="small text-muted" [routerLink]="['/signup']">Don't Have an account? Register</a>
+                    </form>
+                    <div class="register-response" [ngClass]="{'alert-success': responseType === 'success', 'alert-danger': responseType === 'error'}">
+                      {{ responseMessage }}
+                    </div>
+                    <ngx-spinner *ngIf="loading" bdColor="rgba(0, 0, 0, 0.5)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true"></ngx-spinner>
                   </div>
-                  <input type="password" class="form-control" #password placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" required>
                 </div>
-  
-                <button type="submit" class="btn btn-danger btn-block btn-round">Sign In</button>
-              </form>
-              <div class="register-response" [ngClass]="{'alert-success': responseType === 'success', 'alert-danger': responseType === 'error'}">
-                {{ responseMessage }}
               </div>
-              <div class="Register">
-                <a href="#" class="btn btn-link btn-danger">Don't Have an account? Register</a>
-              </div>
-              <ngx-spinner *ngIf="loading" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom"></ngx-spinner>
             </div>
           </div>
         </div>
-        <div class="footer register-footer text-center">
-          <h6>&copy;{{ test | date: 'yyyy' }}, made with <i class="fa fa-heart heart"></i> by RSK Solutions</h6>
-        </div>
       </div>
-    </div>
+    </section>
+  </div>
 </div>
-  

@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h5 class="modal-title text-center">Are you sure you want to register?</h5>
+    <button type="button" class="close" aria-label="Close" (click)="cancelRegistration()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>
+        You are about to create a {{ isTutor ? 'Tutor' : 'Student' }} account.
+        Please confirm if you are happy with the credentials entered.
+    </p>
+</div>
+<div class="modal-footer">
+    <div class="left-side">
+        <button type="button" class="btn btn-default btn-link" (click)="cancelRegistration()">Cancel</button>
+    </div>
+    <div class="divider"></div>
+    <div class="right-side">
+        <button type="button" class="btn btn-danger btn-link" (click)="confirmRegistration()">Confirm</button>
+    </div>
+</div>

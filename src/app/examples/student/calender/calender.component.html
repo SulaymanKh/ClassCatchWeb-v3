@@ -1,0 +1,129 @@
+<div class="wrapper">
+  <div class="page-header booking-page-header" style="background-image: url('./assets/img/login3.jpg');">
+    <div class="filter"></div>
+    <div class="container text-center">
+      <h2 class="display-4">{{ selectedTutor?.name }}</h2>
+    </div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+          <div class="card card-calendar shadow" [@shrinkDisappear]="animationState">
+            <div class="card-header">
+              <h4 class="card-title">Book Your Session</h4>
+            </div>
+            <div class="card-body">
+              <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+                <!-- Step 1: Select Date -->
+                <mat-step [stepControl]="dateFormGroup">
+                  <form [formGroup]="dateFormGroup">
+                    <ng-template matStepLabel>
+                      <span>Select Date</span>
+                    </ng-template>
+                    <p class="section-title">Select a date for your session:</p>
+                    <p class="month">{{ currentMonth }}</p>
+                    <div class="date-selector" #dateSelector>
+                      <div
+                        class="date-container"
+                        *ngFor="let date of dates"
+                        (click)="selectDate(date)"
+                        [class.selected]="date === selectedDate"
+                      >
+                        <div class="date-circle" [class.selected-circle]="date === selectedDate">{{ date.day }}</div>
+                        <div class="weekday">{{ date.weekday }}</div>
+                      </div>
+                    </div>
+                    <div class="time-selector" *ngIf="selectedDate">
+                      <button
+                        type="button"
+                        class="time-button"
+                        *ngFor="let time of availableTimes"
+                        (click)="selectTime(time)"
+                        [class.selected]="time === selectedTime">
+                        {{ time }}
+                      </button>
+                    </div>
+                    <div class="step-actions">
+                      <button type="button" class="btn btn-outline-primary btn-round" [disabled]="!selectedDate || !selectedTime" matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <!-- Step 2: Lesson Details -->
+                <mat-step [stepControl]="lessonFormGroup">
+                  <form [formGroup]="lessonFormGroup">
+                    <ng-template matStepLabel>
+                      <span>Lesson Details</span>
+                    </ng-template>
+                    <p>Provide details about the lesson you would like to have:</p>
+                    <div class="form-group">
+                      <label for="subject">Subject</label>
+                      <input id="subject" type="text" class="form-control" formControlName="subject" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="notes">Notes</label>
+                      <textarea id="notes" class="form-control" formControlName="notes"></textarea>
+                    </div>
+                    <div class="step-actions">
+                      <button type="button" class="btn btn-outline-default btn-round" matStepperPrevious>Back</button>
+                      <button type="button" class="btn btn-outline-primary btn-round" [disabled]="!lessonFormGroup.valid" matStepperNext>Next</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <!-- Step 3: Payment Information -->
+                <mat-step [stepControl]="paymentFormGroup">
+                  <form [formGroup]="paymentFormGroup" (ngSubmit)="onSubmit()">
+                    <ng-template matStepLabel>
+                      <span>Payment Information</span>
+                    </ng-template>
+                    <p>Please confirm your payment details:</p>
+                    <div *ngIf="paymentInformation.length > 0; else noPaymentMethod">
+                      <div *ngFor="let card of paymentInformation">
+                        <div *ngIf="card.isDefault" class="card mt-3 credit-card" [ngClass]="{'border-success': card === selectedCard}">
+                          <div class="card-body" (click)="selectStoredCard(card)">
+                            <div class="card-details d-flex align-items-center">
+                              <img [src]="getCardLogo(card.brand)" alt="{{ card.brand }}" class="card-logo">
+                              <div class="card-info ml-3">    
+                                <span>{{ card.cardHolderName }}</span>             
+                                <span class="badge badge-light-success fs-7 ms-2">Default</span>
+                                <div class="card-number">{{ card.brand }} **** {{ card.maskedCardNumber }}</div>
+                                <div class="card-expires text-muted">Card expires at {{ card.expiryDate }}</div>
+                              </div>
+                            </div>
+                          </div>
+                          <button class="btn btn-danger" type="button" (click)="setCard(card.bankCardID)">Use</button>
+                        </div>
+                      </div>
+                      <button class="btn btn-info mt-3" type="button" (click)="redirectToSettings()">
+                        Use a new card or change default payment
+                      </button>
+                    </div>
+                    <ng-template #noPaymentMethod>
+                      <button class="btn btn-info mt-3" type="button" (click)="redirectToSettings()">
+                        Use a new card or change default payment
+                      </button>
+                    </ng-template>
+                    <div class="step-actions">
+                      <button type="button" class="btn btn-outline-default btn-round" matStepperPrevious>Back</button>
+                      <button type="submit" class="btn btn-success btn-round">Book</button>
+                    </div>
+                  </form>
+                </mat-step>             
+              </mat-stepper>
+            </div>
+          </div>
+          <div class="confirmation-message" *ngIf="confirmationVisible">
+            <h4>Your order has been placed but is awaiting confirmation from the tutor.</h4>
+          </div>
+        </div>
+      </div>
+      <ngx-spinner 
+        *ngIf="loading" 
+        bdColor="rgba(0, 0, 0, 0.5)" 
+        size="medium"
+        color="#fff" 
+        type="ball-scale-multiple">
+      </ngx-spinner>
+    </div>
+  </div>
+</div>

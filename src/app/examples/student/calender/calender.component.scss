@@ -1,0 +1,433 @@
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f8fc;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.page-header.booking-page-header {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+  padding: 20px;
+
+  .filter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 0;
+    animation: fadeInDown 1s ease-out;
+  }
+}
+
+/* Keyframes for Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Styles */
+.section.profile-content {
+  padding: 60px 0;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: -30px;
+  z-index: 1;
+  position: relative;
+
+  .card {
+    border: none;
+    border-radius: 10px;
+    animation: fadeInUp 1s ease-out;
+
+    &.card-calendar {
+      margin-top: -80px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+      .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #ff6f61;
+        color: white;
+        padding: 20px;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .card-body {
+        padding: 20px;
+      }
+    }
+  }
+}
+
+/* Full Calendar Styles */
+.full-calendar {
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .fc-button-group {
+      .fc-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #f5593d;
+        }
+      }
+    }
+
+    .fc-toolbar-title {
+      font-size: 1.5rem;
+      color: #333;
+    }
+  }
+
+  .fc-daygrid-event {
+    background-color: #f5593d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
+  .fc-daygrid-day-number {
+    color: #333;
+  }
+
+  .fc-daygrid-day {
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+}
+
+/* Step Actions */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  button {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header.booking-page-header {
+    min-height: 40vh;
+  }
+
+  .section.profile-content {
+    padding: 30px 0;
+  }
+
+  .card.card-calendar {
+    margin-top: -60px;
+  }
+
+  .step-actions {
+    flex-direction: column;
+
+    button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+}
+
+/* Stepper Styles */
+.mat-horizontal-stepper-header,
+.mat-vertical-stepper-header {
+  align-items: center;
+}
+
+.mat-step-label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.mat-step-label mat-icon {
+  margin-right: 8px;
+  color: #f5593d;
+}
+
+.mat-step-icon {
+  background-color: #f5593d;
+  color: white;
+}
+
+.mat-step-icon-content {
+  font-size: 1.5rem;
+}
+
+// Date Selector Styles
+.date-selector {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  padding-left: 10px; 
+}
+
+.date-selector::-webkit-scrollbar {
+  display: none; 
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  cursor: grab;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.date-container.selected {
+  transform: scale(1.1);
+}
+
+.date-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.date-circle:hover {
+  background-color: #51cbce;
+  color: #fff;
+}
+
+.date-circle.selected-circle {
+  background-color: #51cbce; 
+  color: #fff;
+}
+
+.weekday {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.time-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.time-button:hover {
+  background-color: #51cbce;
+  color: #fff;
+}
+
+.time-button.selected {
+  background-color: #51cbce;
+  color: #fff;
+}
+
+.month {
+  font-weight: bold;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #f5593d; 
+}
+
+@media (max-width: 768px) {
+  .date-container {
+    margin-right: 5px;
+  }
+
+  .date-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .time-button {
+    padding: 8px 16px;
+  }
+
+  .step-actions {
+    flex-direction: column;
+
+    button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+}
+
+/* Confirmation Message Styles */
+.confirmation-message {
+  background-color: #f5593d;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  animation: fadeInUp 1s ease-out forwards;
+  z-index: 1000;
+}
+
+/* Add any additional styles needed to match the example UI */
+.payment-card{
+  margin: 20px auto;
+  max-width: 60%;
+  width: 60%; /* Reduced width for better fit */
+  height: 60%;
+  transition: all 0.3s ease;
+}
+
+#card-element {
+  margin-bottom: 24px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#card-errors {
+  color: red;
+}
+
+.text-success {
+  color: #28a745 !important;
+  font-weight: bold;
+}
+
+.card.border-success {
+  border: 2px solid #28a745;
+}
+
+.btn-info.mt-3 {
+  width: 100%;
+  text-align: center;
+}
+
+.card.credit-card {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+.card.credit-card .card-body {
+  display: flex;
+  align-items: center;
+}
+
+.card.credit-card .card-logo {
+  height: 40px;
+  width: auto;
+}
+
+.card.credit-card .card-info {
+  margin-left: 15px;
+}
+
+.card.credit-card .card-number {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card.credit-card .card-expires {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.btn-info.mt-3 {
+  width: 100%;
+  text-align: center;
+}
+
+.card.border-success {
+  border-color: #28a745;
+}
+
+.badge-light-success {
+  background-color: #d4edda;
+  color: #4eac64;
+  font-size: 0.75rem; /* Adjust font size as needed */
+  padding: 0.25em 0.4em; /* Adjust padding as needed */
+  border-radius: 0.25rem; /* Adjust border radius as needed */
+  margin-left: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+

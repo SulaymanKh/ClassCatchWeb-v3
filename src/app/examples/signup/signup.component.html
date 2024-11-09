@@ -1,67 +1,111 @@
 <div class="wrapper">
-    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
-      <div class="filter"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
-            <div class="card card-register">
-              <h3 class="title">Create An Account</h3>
-              <form class="register-form" (ngSubmit)="register(email.value, username.value, password.value, confirmPassword.value)">
-                <label>Email</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-email-85"></i>
-                    </span>
-                  </div>
-                  <input type="email" class="form-control" #email placeholder="Email" (focus)="focus=true" (blur)="focus=false" required>
+    <div class="page-header" style="background-image: url('./assets/img/login3.jpg');">
+        <section class="h-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col">
+                        <div class="card card-registration my-4">
+                            <div class="row g-0">
+                                <div class="col-xl-6 d-none d-xl-block">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                         alt="Sample photo" class="img-fluid"
+                                         style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="card-body p-md-5 text-black">
+                                        <h3 class="mb-5 text-uppercase text-center">Create An Account</h3>
+
+                                        <!-- Toggle for Account Type -->
+                                        <div class="toggle-section">
+                                            <label class="toggle-label" *ngIf="isStudent">Student Account</label>
+                                            <label class="toggle-label" *ngIf="!isStudent">Tutor Account</label>
+                                        </div>
+
+                                        <!-- Registration Form with Reactive Forms -->
+                                        <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                                            <label>Email</label>
+                                            <div class="input-group form-group-border" [ngClass]="{'input-group-focus': f.email.touched && f.email.invalid}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="nc-icon nc-email-85"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="email" class="form-control" formControlName="email" placeholder="Email" (focus)="focus=true" (blur)="focus=false">
+                                            </div>
+                                            <div *ngIf="f.email.touched && f.email.errors?.required" class="text-danger small">Email is required.</div>
+                                            <div *ngIf="f.email.touched && f.email.errors?.email" class="text-danger small">Invalid email format.</div>
+                                        
+                                            <label>Username</label>
+                                            <div class="input-group form-group-border" [ngClass]="{'input-group-focus': f.username.touched && f.username.invalid}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="nc-icon nc-email-85"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" formControlName="username" placeholder="Username" (focus)="focus=true" (blur)="focus=false">
+                                            </div>
+                                            <div *ngIf="f.username.touched && f.username.errors?.required" class="text-danger small">Username is required.</div>
+                                            <div *ngIf="f.username.touched && f.username.errors?.minlength" class="text-danger small">Username must be at least 4 characters.</div>
+                                            <div *ngIf="f.username.touched && f.username.errors?.maxlength" class="text-danger small">Username cannot exceed 25 characters.</div>
+                                        
+                                            <label>Password</label>
+                                            <div class="input-group form-group-border" [ngClass]="{'input-group-focus': f.password.touched && f.password.invalid}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="nc-icon nc-key-25"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" class="form-control" formControlName="password" placeholder="Password" (focus)="focus1=true" (blur)="focus1=false">
+                                            </div>
+                                            <div *ngIf="f.password.touched && f.password.errors?.required" class="text-danger small">Password is required.</div>
+                                            <div *ngIf="f.password.touched && f.password.errors?.minlength" class="text-danger small">Password must be at least 8 characters.</div>
+                                            <div *ngIf="f.password.touched && f.password.errors?.pattern" class="text-danger small">Password must contain at least one letter and one number.</div>
+                                        
+                                            <label>Confirm Password</label>
+                                            <div class="input-group form-group-border" [ngClass]="{'input-group-focus': f.confirmPassword.touched && f.confirmPassword.invalid}">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="nc-icon nc-key-25"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" (focus)="focus1=true" (blur)="focus1=false">
+                                            </div>
+                                            <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.required" class="text-danger small">Confirmation Password is required.</div>
+                                            <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.mustMatch" class="text-danger small">Passwords must match.</div>
+                                        
+                                            <label>Account Type</label>
+                                            <div class="checkbox-wrapper-41">
+                                                <input type="checkbox" (change)="toggleAccountType()" [(ngModel)]="isStudent">
+                                                <span class="account-type-label">{{ isStudent ? 'Student' : 'Tutor' }}</span>
+                                            </div>
+
+                                            <div class="pt-1 mb-4" style="margin-top: 5px;">
+                                                <button type="submit" class="btn btn-danger btn-block btn-round">Register</button>
+                                            </div>
+                                        </form>                                        
+
+                                        <!-- Response Message -->
+                                        <div class="register-response"
+                                             [ngClass]="{'alert-success': responseType === 'success', 'alert-danger': responseType === 'error'}">
+                                            {{ responseMessage }}
+                                        </div>
+
+                                        <!-- Link to Sign In -->
+                                        <div class="forgot">
+                                            <a [routerLink]="['/signin']"
+                                               class="btn btn-link btn-danger">Already have an account? Sign in</a>
+                                        </div>
+
+                                        <!-- Loading Spinner -->
+                                        <ngx-spinner *ngIf="loading" bdColor="rgba(0, 0, 0, 0.5)" size="medium"
+                                                     color="#fff" type="ball-scale-multiple"></ngx-spinner>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-  
-                <label>Username</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-email-85"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" #username placeholder="Username" (focus)="focus=true" (blur)="focus=false" required>
-                </div>
-  
-                <label>Password</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus1 === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-key-25"></i>
-                    </span>
-                  </div>
-                  <input type="password" class="form-control" #password placeholder="Password" (focus)="focus1=true" (blur)="focus1=false" required>
-                </div>
-  
-                <label>Confirm Password</label>
-                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus': focus1 === true}">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="nc-icon nc-key-25"></i>
-                    </span>
-                  </div>
-                  <input type="password" class="form-control" #confirmPassword placeholder="Confirm Password" (focus)="focus1=true" (blur)="focus1=false" required>
-                </div>
-                <button type="submit" class="btn btn-danger btn-block btn-round">Register</button>
-              </form>
-              <div class="register-response" [ngClass]="{'alert-success': responseType === 'success', 'alert-danger': responseType === 'error'}">
-                {{ responseMessage }}
-              </div>
-              <div class="forgot">
-                <a href="#" class="btn btn-link btn-danger">Already have an account? Sign in</a>
-              </div>
-              <ngx-spinner *ngIf="loading" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom"></ngx-spinner>
             </div>
-          </div>
-        </div>
-        <div class="footer register-footer text-center">
-          <h6>&copy;{{ test | date: 'yyyy' }}, made with <i class="fa fa-heart heart"></i> by RSK Solutions</h6>
-        </div>
-      </div>
+        </section>
     </div>
 </div>
-  

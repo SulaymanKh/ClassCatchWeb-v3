@@ -1,65 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from "ngx-spinner";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth-service/auth.service';
 
 @Component({
-    selector: 'app-signin',
-    templateUrl: './signin.component.html',
-    styleUrls: ['./signin.component.scss']
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-    test : Date = new Date();
-    focus;
-    focus1;
-    responseMessage: string | null = null;
-    responseType: 'success' | 'error' | null = null;
-    loading = false;
+  signInForm: FormGroup;
+  responseMessage: string | null = null;
+  responseType: 'success' | 'error' | null = null;
+  loading = false;
+  focus;
+  focus1;
 
-    constructor(private spinner: NgxSpinnerService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-    ngOnInit() {
+  ngOnInit() {
+    this.signInForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    if (this.signInForm.invalid) {
+      this.signInForm.markAllAsTouched();
+      return;
     }
 
-    signIn(username, password){
-        this.loading = true;
-        this.spinner.show();
+    this.loading = true;
+    this.spinner.show();
 
-        fetch("https://api.classcatch.co.uk/api/Auth/signin", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                "username": username,
-                "password": password
-            })
-        })
-        .then((response) => {
-            this.loading = false;
-            this.spinner.hide();
+    const { username, password } = this.signInForm.value;
 
-          if (response.status == 200) {
-            this.responseType = 'success';
-            return response.text();
-          } else if (response.status == 400 || response.status == 401){
-            this.responseType = 'error';
-            return response.text();
-          } else{
-            this.responseType = 'error';
-            throw new Error("Signing In failed");
-          }
-        })
-        .then((data) => {
-            if (this.responseType == 'success'){
-                localStorage.setItem('authToken', data);
-                console.log("logged in");
-                this.router.navigate(['/user-profile']);
-            }else {
-                this.responseMessage = data;
-            }
-        })
-        .catch((error) => {
-            this.loading = false;
-            this.spinner.hide();
-            console.error(error);
-        });
-    }
+    this.authService.login(username, password).subscribe({
+      next: (success) => {
+        this.loading = false;
+        this.spinner.hide();
+        if (success) {
+          this.router.navigate(['/user-profile']);
+        } else {
+          this.responseMessage = 'Login failed. Please check your credentials.';
+          this.responseType = 'error';
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        this.spinner.hide();
+        this.responseMessage = 'An error occurred. Please try again later.';
+        this.responseType = 'error';
+        console.error('Login error:', error);
+      }
+    });
+  }
 }
